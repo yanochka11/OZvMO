@@ -103,3 +103,4 @@ def lagrange(variab, func, restr, restr_func):
     for i in range(len(sol_restr)):
         output_str += f'({float(sol_restr[i][x]):.3}, {float(sol_restr[i][y]):.3}, ' +\
                     f'{float(sol_restr[i]["func_value"]):.3}) - {sol_restr[i]["type"]} \n'
+    return output_str
