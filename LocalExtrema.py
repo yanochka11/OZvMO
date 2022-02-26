@@ -1,5 +1,6 @@
 import numpy as np
 import sympy as sm
+import pandas as pd
 
 
 def local_extrema(variab, func, restr):
