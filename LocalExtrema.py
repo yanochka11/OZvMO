@@ -3,15 +3,18 @@ import sympy as sm
 
 
 def local_extrema(variab, func, restr):
-    '''
+    """
     Функцция поиска локальных экстремумов функции двух переменных
     :param variab: кортеж состоящий из переменных, которые являются sympy symbols
+
     :param func: sympy expression
+
     :param restr: возвращает словарь, где ключом выступают названия переменных,
     значениями являются списки, с ограничивающими интервалами
+
     :return: Список координат и значение функции в точке, для всех точек локальных экстремумов,
      с указанием типа экстремума (минимум, максимум, седловая точка)
-    '''
+    """
     x, y = sm.symbols('x, y', real=True)
 
     func = func.subs({variab[0]: x, variab[1]: y})  # заменяем переменные во избежание комплексных ответов
@@ -47,7 +50,7 @@ def local_extrema(variab, func, restr):
     for i in range(len(sol)):
         output_str += f'({float(sol[i][x]):.3},\t{float(sol[i][y]):.3},' + \
                       f'\t{float(sol[i]["func_value"]):.3}) - {sol[i]["type"]} \n'
-    return output_str
+    return output_str, sol
 
 
 def lagrange(variab, func, restr, restr_func):
@@ -103,4 +106,4 @@ def lagrange(variab, func, restr, restr_func):
     for i in range(len(sol_restr)):
         output_str += f'({float(sol_restr[i][x]):.3}, {float(sol_restr[i][y]):.3}, ' +\
                     f'{float(sol_restr[i]["func_value"]):.3}) - {sol_restr[i]["type"]} \n'
-    return output_str
+    return output_str, sol
