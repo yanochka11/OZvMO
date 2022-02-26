@@ -1,11 +1,13 @@
-from parser import parser_task1
-from LocalExtrema import local_extrema
-from plot import plot
+import OZvMO.parser as parser
+import OZvMO.LocalExtrema as LocalExtrema
+import OZvMO.plot as plot
 
 
 def task1():
-    variab, func, restr = parser_task1()
-    output_str, dots = local_extrema(variab, func, restr)
-    fig = plot(variab, func, restr, dots)
+    variab, func, restr = parser.parser_task1()
+    output_str, dots = LocalExtrema.local_extrema(variab, func, restr)
+    fig = plot.plot(variab, func, restr, dots)
 
     return output_str, fig
+
+
