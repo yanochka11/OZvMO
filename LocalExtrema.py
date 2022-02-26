@@ -50,8 +50,8 @@ def local_extrema(variab, func, restr):
     for i in range(len(sol)):
         output_str += f'({float(sol[i][x]):.3},\t{float(sol[i][y]):.3},' + \
                       f'\t{float(sol[i]["func_value"]):.3}) - {sol[i]["type"]} \n'
-        sol = pd.Dataframe(sol)
-        sol.columns = ['x', 'y', 'type', 'z']
+    sol = pd.Dataframe(sol)
+    sol.columns = ['x', 'y', 'type', 'z']
 
     return output_str, sol
 
@@ -110,6 +110,6 @@ def lagrange(variab, func, restr, restr_func):
         output_str += f'({float(sol_restr[i][x]):.3}, {float(sol_restr[i][y]):.3}, ' +\
                     f'{float(sol_restr[i]["func_value"]):.3}) - {sol_restr[i]["type"]} \n'
 
-        sol = pd.Dataframe(sol)
-        sol.columns = ['x', 'y', 'type', 'z']
+    sol = pd.Dataframe(sol)
+    sol.columns = ['x', 'y', 'type', 'z']
     return output_str, sol
