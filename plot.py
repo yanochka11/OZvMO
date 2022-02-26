@@ -21,8 +21,8 @@ def plot(variab, func, restr, dots):
         x_min = float(dots.x.min())
         x_max = float(dots.x.max())
 
-        x_min = x_min - 3 # во избежание отрисовки точек на границах графика
-        x_max = x_max + 3
+        x_min = x_min - max((x_max - x_min) * 0.1, 1) # во избежание отрисовки точек на границах графика
+        x_max = x_max + max((x_max - x_min) * 0.1, 1)
     else:
         x_min = restr[x][0]
         x_max = restr[x][1]
@@ -30,8 +30,8 @@ def plot(variab, func, restr, dots):
     if restr[y] == [-np.inf, np.inf]:
         y_min = float(dots.y.min())
         y_max = float(dots.y.max())
-        y_min = y_min - 3
-        y_max = y_max + 3
+        y_min = y_min - max((y_max - y_min) * 0.1, 1)
+        y_max = y_max + max((y_max - y_min) * 0.1, 1)
     else:
         y_min = restr[y][0]
         y_max = restr[y][1]
