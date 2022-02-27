@@ -12,7 +12,7 @@ def solve_task1():
 
 
 def solve_task2():
-    variables, func, restr, restr_func = parser.parser_task2()
+    variab, func, restr, restr_func = parser.parser_task2()
     output_str, sol = LocalExtrema.lagrange(variables, func, restr, restr_func)
     fig = plot.plot(variab, func, restr, dots)
     print(output_str)
