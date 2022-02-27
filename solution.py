@@ -11,7 +11,7 @@ def solve_task1():
     fig.show()
 
 
-def solve_task2()
+def solve_task2():
     variables, func, restr, restr_func = parser.parser_task2()
     output_str, sol = lagrange()
     fig = plot.plot(variab, func, restr, dots)
