@@ -50,11 +50,11 @@ def plot(variab, func, restr, dots):
     fig = make_subplots(rows=1, cols=2,
                         specs=[[{'is_3d': True}, {'is_3d': False}]],
                         subplot_titles=('Поверхность', 'Линии уровня'))  # создаем фигуру
-    fig.add_trace(go.Surface(z=z, x=x, y=y, colorscale='pinkyl', opacity=0.7),
+    fig.add_trace(go.Surface(z=z.T, x=x, y=y, colorscale='pinkyl', opacity=0.7),
                   1, 1)  # добавляем саму поверхность функции
     fig.add_trace(go.Scatter3d(z=dots.z.astype(float), x=dots.x.astype(float),
                                y=dots.y.astype(float), showlegend=False, mode='markers'), 1, 1)  # точки экстремума
-    fig.add_trace(go.Contour(z=z, x=x, y=y, showscale=False, colorscale='pinkyl'),
+    fig.add_trace(go.Contour(z=z.T, x=x, y=y, showscale=False, colorscale='pinkyl'),
                   1, 2)  # линии уровня
     fig.add_trace(go.Scatter(x=dots.x.astype(float), y=dots.y.astype(float),
                              showlegend=False, mode='markers'), 1, 2)  # точки экстремума
