@@ -87,7 +87,7 @@ def local_extrema(variab, func, restr):
         sol_restr = pd.DataFrame(sol_restr)
         sol_restr.columns = ['x', 'y', 'type', 'z']
     
-    return output_str, sol_restr_all, sol_restr
+    return  sol_restr_all, sol_restr
 
 
 
@@ -121,30 +121,61 @@ def lagrange(variab, func, restr, restr_func):
                     restr_func],
                    [x, y, lam], dict=True)  # приравниваем частные производные и ограничивающую функцию к нулю и
 # решаем систему
-
-    sol_restr = []
     for solution in sol:
+        if len(solution) <3:
+            sol.remove(solution)
+    if sol == []:
+        sol_restr_all = 'бесконечное количество решений'
+        sol_restr = ''
+    else:
+        sol_restr = []
+        sol_restr_all = []
+        for solution in sol:
+            if solution[x].is_real and solution[y].is_real:
 
-        if restr[variab[0]][0] <= solution[x] <= restr[variab[0]][1] and \
-           restr[variab[1]][0] <= solution[y] <= restr[variab[1]][1]:
-            sol_restr.append(solution)
+                if restr[variab[0]][0] <= solution[x] <= restr[variab[0]][1] and \
+                   restr[variab[1]][0] <= solution[y] <= restr[variab[1]][1]:
+                    sol_restr.append(solution)
+                    sol_restr_all.append(solution)
+            else:
 
-    hessian_matrix = sm.hessian(lagr_func, [lam, x, y])  # Hessian matrix
+                    sol_restr_all.append(solution)
 
-    for dot in sol_restr:
-        if hessian_matrix.subs(dot).det() > 0:  # смотрим знак определителя матрицы
-            dot['type'] = 'max'  # добавляем в словарь с соответствующей точкой ее тип
-        elif hessian_matrix.subs(dot).det() < 0:  # смотрим знак определителя матрицы
-            dot['type'] = 'min'  # добавляем в словарь с соответствующей точкой ее тип
-        else:
-            dot['type'] = 'saddle'  # добавляем в словарь с соответствующей точкой ее тип
-        dot['func_value'] = func.subs(dot)
+        hessian_matrix = sm.hessian(lagr_func, [lam, x, y])  # Hessian matrix
 
-    output_str = ''
-    for i in range(len(sol_restr)):
-        output_str += f'({float(sol_restr[i][x]):.3}, {float(sol_restr[i][y]):.3}, ' +\
-                    f'{float(sol_restr[i]["func_value"]):.3}) - {sol_restr[i]["type"]} \n'
+        for dot in sol_restr_all:
+            if hessian_matrix.subs(dot).det() > 0:  # смотрим знак определителя матрицы
+                dot['type'] = 'max'  # добавляем в словарь с соответствующей точкой ее тип
+            elif hessian_matrix.subs(dot).det() < 0:  # смотрим знак определителя матрицы
+                dot['type'] = 'min'  # добавляем в словарь с соответствующей точкой ее тип
+            else:
+                dot['type'] = 'saddle'  # добавляем в словарь с соответствующей точкой ее тип
+            dot['func_value'] = func.subs(dot)
 
-    sol = pd.DataFrame(sol)
-    sol.columns = ['x', 'y', 'lam', 'type', 'z']
-    return output_str, sol
+        for dot in sol_restr:
+            hessian_matrix_with_dot = hessian_matrix.subs(dot)
+            hessian_matrix_with_dot = np.array(hessian_matrix_with_dot).astype(np.float64)
+
+            if np.all(np.linalg.eigvals(hessian_matrix_with_dot) > 0):  # матрица положительно определенная, точка минимума
+                dot['type'] = 'min'  # добавляем в словарь с соответствующей точкой ее тип
+            elif np.all(
+                    np.linalg.eigvals(hessian_matrix_with_dot) < 0):  # матрица отрицительно определенная, точка максимума
+                dot['type'] = 'max'
+
+            else:
+                dot['type'] = 'saddle'
+            dot['func_value'] = func.subs(dot)
+        output_str = ''
+    #     for i in range(len(sol_restr)):
+    #         output_str += f'({float(sol_restr[i][x]):.3}, {float(sol_restr[i][y]):.3}, ' +\
+    #                     f'{float(sol_restr[i]["func_value"]):.3}) - {sol_restr[i]["type"]} \n'
+
+        sol_restr_all = pd.DataFrame(sol_restr_all)
+        print(sol_restr_all)
+        sol_restr_all.columns = ['x', 'y','lam', 'type', 'z']
+
+        sol_restr = pd.DataFrame(sol_restr)
+        sol_restr.columns = ['x', 'y','lam', 'type', 'z']
+    return  sol_restr_all, sol_restr
+
+
