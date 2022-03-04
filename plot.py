@@ -2,6 +2,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
 import sympy as sm
+import pandas as pd
 np.seterr(all='ignore')
 
 
