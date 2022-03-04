@@ -16,7 +16,7 @@ def local_extrema(variab, func, restr):
     :return: Список координат и значение функции в точке, для всех точек локальных экстремумов,
      с указанием типа экстремума (минимум, максимум, седловая точка)
     """
-    x, y = sm.symbols('x, y', real=True)
+    x, y = sm.symbols('x, y') #!!! комплексные переменные
 
     func = func.subs({variab[0]: x, variab[1]: y})  # заменяем переменные во избежание комплексных ответов
     variab1_d = sm.diff(func, x)  # дифференцируем по каждой из переменных
@@ -26,17 +26,28 @@ def local_extrema(variab, func, restr):
                     variab2_d],
                    [x, y], dict=True)  # приравниваем частные производные к нулю и решаем систему
 
+    sol_restr_all = []  #!!!
     sol_restr = []
     for solution in sol:
+        if solution[x].is_real and solution[y].is_real:
+             if restr[variab[0]][0] <= solution[x] <= restr[variab[0]][1] and \
+                 restr[variab[1]][0] <= solution[y] <= restr[variab[1]][1]:
+                sol_restr.append(solution)
+                sol_restr_all.append(solution)
 
-        if restr[variab[0]][0] <= solution[x] <= restr[variab[0]][1] and \
-                restr[variab[1]][0] <= solution[y] <= restr[variab[1]][1]:
-            sol_restr.append(solution)
+        else:
+
+                sol_restr_all.append(solution)
+
 
     hessian_matrix = sm.hessian(func, [x, y], )  # Hessian matrix
-    for dot in sol:
+    
+
+    
+    for dot in sol_restr_all:
         hessian_matrix_with_dot = hessian_matrix.subs(dot)
-        hessian_matrix_with_dot = np.array(hessian_matrix_with_dot).astype(np.float64)
+        hessian_matrix_with_dot = np.array(hessian_matrix_with_dot).astype(complex)
+
         if np.all(np.linalg.eigvals(hessian_matrix_with_dot) > 0):  # матрица положительно определенная, точка минимума
             dot['type'] = 'min'  # добавляем в словарь с соответствующей точкой ее тип
         elif np.all(
@@ -46,15 +57,38 @@ def local_extrema(variab, func, restr):
         else:
             dot['type'] = 'saddle'
         dot['func_value'] = func.subs(dot)
+    
+    for dot in sol_restr:
+        hessian_matrix_with_dot = hessian_matrix.subs(dot)
+        hessian_matrix_with_dot = np.array(hessian_matrix_with_dot).astype(np.float64)
+
+        if np.all(np.linalg.eigvals(hessian_matrix_with_dot) > 0):  # матрица положительно определенная, точка минимума
+            dot['type'] = 'min'  # добавляем в словарь с соответствующей точкой ее тип
+        elif np.all(
+                np.linalg.eigvals(hessian_matrix_with_dot) < 0):  # матрица отрицительно определенная, точка максимума
+            dot['type'] = 'max'
+
+        else:
+            dot['type'] = 'saddle'
+        dot['func_value'] = func.subs(dot)
+        
 
     output_str = ''
-    for i in range(len(sol)):
-        output_str += f'({float(sol[i][x]):.3},\t{float(sol[i][y]):.3},' + \
-                      f'\t{float(sol[i]["func_value"]):.3}) - {sol[i]["type"]} \n'
-    sol = pd.DataFrame(sol)
-    sol.columns = ['x', 'y', 'type', 'z']
+    if sol == []:
+        output_str += 'нет точек экстремума'  #!!!
+    else:
 
-    return output_str, sol
+        for i in range(len(sol_restr_all)):
+            output_str += f'({(sol_restr_all[i][x])},{(sol_restr_all[i][y])},' + \
+                          f'{(sol_restr_all[i]["func_value"]):}) - {sol_restr_all[i]["type"]} \n'
+        sol_restr_all = pd.DataFrame(sol_restr_all)
+        sol_restr_all.columns = ['x', 'y', 'type', 'z']
+
+        sol_restr = pd.DataFrame(sol_restr)
+        sol_restr.columns = ['x', 'y', 'type', 'z']
+    
+    return output_str, sol_restr_all, sol_restr
+
 
 
 def lagrange(variab, func, restr, restr_func):
@@ -69,7 +103,7 @@ def lagrange(variab, func, restr, restr_func):
     :return: Список координат и значение функции в точке, для всех точек локальных экстремумов,
      с указанием типа экстремума (минимум, максимум, седловая точка)
     '''
-    x, y, lam = sm.symbols('x, y lambda', real=True)
+    x, y, lam = sm.symbols('x, y lambda')
 
     func = func.subs({variab[0]: x, variab[1]: y})  # заменяем переменные во избежание комплексных ответов
     restr_func = restr_func.subs({variab[0]: x, variab[1]: y})
