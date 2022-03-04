@@ -31,7 +31,7 @@ def local_extrema(variab, func, restr):
     for solution in sol:
         if solution[x].is_real and solution[y].is_real:
              if restr[variab[0]][0] <= solution[x] <= restr[variab[0]][1] and \
-                 restr[variab[1]][0] <= solution[y] <= restr[variab[1]][1]:
+                restr[variab[1]][0] <= solution[y] <= restr[variab[1]][1]:
                 sol_restr.append(solution)
                 sol_restr_all.append(solution)
 
@@ -83,7 +83,9 @@ def local_extrema(variab, func, restr):
                           f'{(sol_restr_all[i]["func_value"]):}) - {sol_restr_all[i]["type"]} \n'
         sol_restr_all = pd.DataFrame(sol_restr_all)
         sol_restr_all.columns = ['x', 'y', 'type', 'z']
-
+        for i in range(len(sol_restr_all)):
+            sm.N(sol_restr_all.loc[i,:])
+            
         sol_restr = pd.DataFrame(sol_restr)
         sol_restr.columns = ['x', 'y', 'type', 'z']
     
@@ -173,7 +175,8 @@ def lagrange(variab, func, restr, restr_func):
         sol_restr_all = pd.DataFrame(sol_restr_all)
 
         sol_restr_all.columns = ['x', 'y','lam', 'type', 'z']
-
+        for i in range(len(sol_restr_all)):
+            sm.N(sol_restr_all.loc[i,:])
         sol_restr = pd.DataFrame(sol_restr)
         sol_restr.columns = ['x', 'y','lam', 'type', 'z']
     return  sol_restr_all, sol_restr
