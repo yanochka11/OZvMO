@@ -45,11 +45,11 @@ def parse_function(variables):
             function = input('Введите функцию: ')
             function = sm.parsing.sympy_parser.parse_expr(function.replace('–', '-'))
             # заменяем минусы
-            check_var = function.free_symbols.difference(variables)
-            # проверяем не содержит ли функция лишние переменные
-            if len(check_var) != 0:
-                print('Введены лишние переменные')
-                raise Exception
+#             check_var = function.free_symbols.difference(variables)
+#             # проверяем не содержит ли функция лишние переменные
+#             if len(check_var) != 0:
+#                 print('Введены лишние переменные')
+#                 raise Exception
             flag_func = True
         except Exception:
             print('Ошибка ввода. Введите функцию еще раз: ')
@@ -115,10 +115,10 @@ def parse__restr_function(variables):
         try:
             restr_function = input('Введите  огранеичивающую функцию: ')
             restr_function = sm.parsing.sympy_parser.parse_expr(restr_function.replace('–', '-'))
-            check_var = restr_function.free_symbols.difference(variables)
-            if len(check_var) != 0:
-                print('Введены лишние переменные')
-                raise Exception
+#             check_var = restr_function.free_symbols.difference(variables)
+#             if len(check_var) != 0:
+#                 print('Введены лишние переменные')
+#                 raise Exception
             flag_func = True
         except Exception:
             print('Ошибка ввода. Введите функцию еще раз: ')
