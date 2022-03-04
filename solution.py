@@ -6,8 +6,8 @@ from IPython.display import display
 def solve_task1():
     variab, func, restr = parser.parser_task1()
     sol_restr_all, sol_restr = LocalExtrema.local_extrema(variab, func, restr)
-    if sol_restr_all == []:
-        sol_restr_all = 'нет точек экстремума'
+#     if sol_restr_all == []:
+#         sol_restr_all = 'нет точек экстремума'
     fig = plot.plot(variab, func, restr, sol_restr)
     display(sol_restr_all)
     fig.show()
