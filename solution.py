@@ -1,7 +1,7 @@
 import OZvMO.parser as parser
 import OZvMO.LocalExtrema as LocalExtrema
 import OZvMO.plot as plot
-
+from IPython.display import display
 
 def solve_task1():
     variab, func, restr = parser.parser_task1()
@@ -9,7 +9,7 @@ def solve_task1():
     if sol_restr_all == []:
         sol_restr_all = 'нет точек экстремума'
     fig = plot.plot(variab, func, restr, sol_restr)
-    print(sol_restr_all)
+    display(sol_restr_all)
     fig.show()
 
 
@@ -19,5 +19,5 @@ def solve_task2():
 #     if sol_restr_all == []:
 #         sol_restr_all = 'нет точек экстремума'
     fig = plot.plot(variables, func, restr, sol_restr)
-    print(sol_restr_all)
+    display(sol_restr_all)
     fig.show()
