@@ -84,7 +84,7 @@ def local_extrema(variab, func, restr):
         sol_restr_all = pd.DataFrame(sol_restr_all)
         sol_restr_all.columns = ['x', 'y', 'type', 'z']
         for i in range(len(sol_restr_all)):
-            (sol_restr_all.loc[i,['x','y', 'z']].apply(lambda x: sm.N(x,4)))
+            sol_restr_all = (sol_restr_all.loc[i,['x','y', 'z']].apply(lambda x: sm.N(x,4)))
             
         sol_restr = pd.DataFrame(sol_restr)
         sol_restr.columns = ['x', 'y', 'type', 'z']
@@ -177,7 +177,7 @@ def lagrange(variab, func, restr, restr_func):
         sol_restr_all.columns = ['x', 'y','lam', 'type', 'z']
         sol_restr_all.drop(['lam'], axis=1)
         for i in range(len(sol_restr_all)):
-            (sol_restr_all.loc[i,['x','y', 'z']].apply(lambda x: sm.N(x,4)))
+            sol_restr_all = (sol_restr_all.loc[i,['x','y', 'z']].apply(lambda x: sm.N(x,4)))
         sol_restr = pd.DataFrame(sol_restr)
         sol_restr.columns = ['x', 'y','lam', 'type', 'z']
     return  sol_restr_all, sol_restr
