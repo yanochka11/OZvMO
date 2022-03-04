@@ -171,7 +171,7 @@ def lagrange(variab, func, restr, restr_func):
     #                     f'{float(sol_restr[i]["func_value"]):.3}) - {sol_restr[i]["type"]} \n'
 
         sol_restr_all = pd.DataFrame(sol_restr_all)
-        print(sol_restr_all)
+
         sol_restr_all.columns = ['x', 'y','lam', 'type', 'z']
 
         sol_restr = pd.DataFrame(sol_restr)
