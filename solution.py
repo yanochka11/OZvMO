@@ -10,6 +10,7 @@ def solve_task1():
     except Exception:
         print('Решений не находится')
         sol_restr = []
+        sol_restr_all = []
     if len(sol_restr_all) == 0:
         
          sol_restr_all = 'нет точек экстремума'
@@ -25,6 +26,7 @@ def solve_task2():
     except Exception:
         print('Решений не находится')
         sol_restr = [] 
+        sol_restr_all = []
     if len(sol_restr_all) == 0:
          sol_restr_all = 'нет точек экстремума'
     fig = plot.plot(variables, func, restr, sol_restr)
