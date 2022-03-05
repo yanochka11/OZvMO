@@ -5,8 +5,13 @@ from IPython.display import display
 
 def solve_task1():
     variab, func, restr = parser.parser_task1()
-    sol_restr_all, sol_restr = LocalExtrema.local_extrema(variab, func, restr)
+    try:
+        sol_restr_all, sol_restr = LocalExtrema.local_extrema(variab, func, restr)
+    except Exception:
+        print('Решений не находится')
+        sol_restr = []
     if len(sol_restr_all) == 0:
+        
          sol_restr_all = 'нет точек экстремума'
     fig = plot.plot(variab, func, restr, sol_restr)
     display(sol_restr_all)
@@ -15,7 +20,11 @@ def solve_task1():
 
 def solve_task2():
     variables, func, restr, restr_func = parser.parser_task2()
-    sol_restr_all, sol_restr = LocalExtrema.lagrange(variables, func, restr, restr_func)
+    try:
+        sol_restr_all, sol_restr = LocalExtrema.lagrange(variables, func, restr, restr_func)
+    except Exception:
+        print('Решений не находится')
+        sol_restr = [] 
     if len(sol_restr_all) == 0:
          sol_restr_all = 'нет точек экстремума'
     fig = plot.plot(variables, func, restr, sol_restr)
