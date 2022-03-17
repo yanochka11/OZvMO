@@ -57,7 +57,3 @@ def parser_task_gr():
     func = parse_function_tz2(variables)
     interval = parse_restriction_tz2(variables)
     return variables, func, interval
-
-
-if __name__=='__main__':
-    print(parser_task_gr())
