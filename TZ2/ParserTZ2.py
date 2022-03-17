@@ -37,13 +37,14 @@ def parse_restriction_tz2(variables):
     :return: dict: key=variables, value=list
     '''
 
+    restr_val = None
     restr_values = input(f'Введите ограничения  ')
     restr_values = restr_values.strip()  # убираем пробелы в конце и начале
-
+                
     restr_values = restr_values.replace(',', ' ')  # проверка вводов
     restr_values = re.sub(" +", " ", restr_values)  # убираем лишние пробелы
     restr_val = restr_values
-    restr_val = restr_val.split()
+    restr = restr_val.split()
     interval = [float(restr[0]), float(restr[1])]
     return interval
 
