@@ -44,6 +44,7 @@ def parse_restriction_tz2(variables):
     restr_values = restr_values.replace(',', ' ')  # проверка вводов
     restr_values = re.sub(" +", " ", restr_values)  # убираем лишние пробелы
     restr_val = restr_values
+        
     restr = restr_val.split()
     interval = [float(restr[0]), float(restr[1])]
     return interval
