@@ -1,9 +1,10 @@
 import pandas as pd
+from typing import Literal
 
 
 def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
-                 flag_results=False, flag_data=False, flag_opt=1):
-    '''
+                 flag_results=False, flag_data=False, type_opt: Literal['min', 'max'] = 'min'):
+    """
     Функция поиска экстремума функции одной переменной методом золотого сечения
     :param func: python function
     :param interval: list consisting of float numbers(left and right bounds)
@@ -11,13 +12,16 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
     :param max_iter: maximum amount of iterations
     :param flag_results: flag: output of intermediate results
     :param flag_data: flag: recording intermediate results in a dataset
-    :param flag_opt: type of extrema: if min:flag_opt=1
+    :param type_opt: type of extrema: if min:flag_opt=1
                                       if max: flag_opt=-1
 
     :return: extrema:the point at which the extremum
              df: intermediate results in a dataset
-    '''
-
+    """
+    if type_opt == 'min':
+        flag_opt = 1
+    else:
+        flag_opt = -1
     data = []
     df = pd.DataFrame(columns=['iter', 'point', 'function'])
     phi = (5 ** 0.5 + 1) / 2
@@ -35,7 +39,7 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
 
     for i in range(max_iter):
         if abs(a - b) >= pression:
-            if flag_opt*(x1) > flag_opt*(x2):
+            if flag_opt * x1 > flag_opt * x2:
                 a = x1
                 x1 = b - (b - a) / phi
                 x2 = a + (b - a) / phi
@@ -63,4 +67,4 @@ if __name__ == '__main__':
 
 
     print(golden_ratio(f, [0, 1.5], pression=10 ** (-5), max_iter=500,
-                       flag_results=1, flag_data=0))
+                       flag_results=True, flag_data=False))
