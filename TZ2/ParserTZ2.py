@@ -1,4 +1,3 @@
-import numpy as np
 import sympy as sm
 import re
 
@@ -25,6 +24,7 @@ def parse_function_tz2(variables):
 
     function = input('Введите функцию: ')
     function = sm.parsing.sympy_parser.parse_expr(function.replace('–', '-'))
+    function = sm.lambdify(variables, function)
 
     return function
 
