@@ -68,6 +68,6 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
 
 
 if __name__ == '__main__':
-    def f(x): return x ** 3 - x ** 2 - x
+    def f(x): return
     print(golden_ratio(f, [0, 1.5], pression=10 ** (-5), max_iter=500,
                        flag_results=True, flag_data=False))

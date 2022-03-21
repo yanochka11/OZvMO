@@ -3,6 +3,8 @@ import numpy as np
 import plotly.graph_objects as go
 
 def plot(func, interval, df):
+
+    df['size'] = 3
     fig = px.scatter(df, x='point', y='function', size='size',
                      animation_frame='iter',
                      size_max=7,
