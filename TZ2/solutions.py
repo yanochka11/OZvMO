@@ -21,9 +21,9 @@ def solve_golden_ratio(precision=1e-5, max_iter=500,
     func, interval, extrema, df = golden_ratio(func, interval, pression=precision, max_iter=max_iter,
                                                flag_results=flag_results, flag_data=flag_data, type_opt=type_opt)
     if df.shape[0] != 0:
-        display(df)
+        display(df['iter', 'point', 'function'])
     print(f'точка экстремума: x = {extrema}, значение функции {func(extrema)}.')
-    return func, interval, df
+
 
 def solve_parabolic_interpolation(precision=1e-5, max_iter=500,
                                   flag_results=False, flag_data=False, type_opt='min'):
