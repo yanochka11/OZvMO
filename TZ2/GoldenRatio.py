@@ -25,7 +25,7 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
             flag_opt = -1
 
         data = []
-        df = pd.DataFrame(columns=['iter', 'point', 'function'])
+        df = pd.DataFrame(columns=['iter', 'point', 'function', 'size'])
         phi = (5 ** 0.5 + 1) / 2
         a = interval[0]
         b = interval[1]
@@ -35,7 +35,7 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
         x2 = a + (b - a) / phi
 
         if flag_data:
-            data = [[0, extrema, func(extrema)]]
+            data = [[0, extrema, func(extrema), 3]]
         if flag_results:
             print(f"Номер итерации {0}, точка {(a+b) / 2}, функция {func((a+b) / 2)}.")
 
@@ -57,9 +57,9 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
                 break
 
 
-            data.append(([i+1, extrema, func(extrema)]))
-            df = pd.DataFrame(data, columns=['iter', 'point', 'function'])
-            df['size'] = 3
+            data.append(([i+1, extrema, func(extrema), 3]))
+            df = pd.DataFrame(data, columns=['iter', 'point', 'function', 'size'])
+
             if flag_results:
                 print(f"Номер итерации {i+1}, точка {extrema}, функция {func(extrema)}.")
     except Exception:
