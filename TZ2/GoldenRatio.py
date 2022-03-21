@@ -59,7 +59,7 @@ def golden_ratio(func, interval, pression=10 ** (-5), max_iter=500,
 
             data.append(([i+1, extrema, func(extrema)]))
             df = pd.DataFrame(data, columns=['iter', 'point', 'function'])
-
+            df['size'] = 3
             if flag_results:
                 print(f"Номер итерации {i+1}, точка {extrema}, функция {func(extrema)}.")
     except Exception:
