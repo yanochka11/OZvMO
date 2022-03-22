@@ -1,6 +1,7 @@
 from typing import Callable, Any, Tuple, Dict, TypedDict, List, Sequence
 from numbers import Real
 import numpy as np
+from scipy.optimize import line_search
 
 
 def bfgs(function: Callable[[Sequence[Real], Any], Real],
@@ -26,10 +27,15 @@ def bfgs(function: Callable[[Sequence[Real], Any], Real],
     :return:
     """
     xk = x0.copy()
+    hk = np.eye((1,1))
     for k in range(max_iter):
         grad_func = gradient(function, xk)
-        if norm2(grad_func) < tolerance:
-
+        if norm2(grad_func) > tolerance:
+            pk = -hk*gradient(function, xk)
+            alpha_k = line_search(function,
+                                  lambda x: gradient(function, x, **kwargs).reshape(1, -1),
+                                  c1=c1 c2=c2, maxiter=max_iter*10)[0]
+            xk1 =
             pass
 
         else:
