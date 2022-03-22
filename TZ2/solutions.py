@@ -1,6 +1,7 @@
 from OZvMO.TZ2.ParserTZ2 import parser_task_gr
 from OZvMO.TZ2.GoldenRatio import golden_ratio
 from OZvMO.TZ2.parabols import parabolic_interpolation
+from OZvMO.TZ2.brent import brent
 from IPython.display import display
 
 
