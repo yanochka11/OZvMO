@@ -1,7 +1,7 @@
 from OZvMO.TZ2.ParserTZ2 import parser_task_gr
 from OZvMO.TZ2.GoldenRatio import golden_ratio
 from OZvMO.TZ2.parabols import parabolic_interpolation
-from OZvMO.TZ2.brent import brent
+from OZvMO.TZ2.Brent import brent
 from IPython.display import display
 
 
@@ -61,7 +61,7 @@ def solve_brent(pression=1e-5, max_iter=500,
     """
     variables, func, interval = parser_task_gr()
 
-    extrema, df = parabolic_interpolation(func, interval, pression=pression, max_iter=max_iter,
+    extrema, df = brent(func, interval, pression=pression, max_iter=max_iter,
                                           flag_results=flag_results, flag_data=flag_data, type_opt=type_opt)
     if df.shape[0] != 0:
         display(df)
