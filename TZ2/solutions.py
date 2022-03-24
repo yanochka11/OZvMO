@@ -1,7 +1,7 @@
-from ParserTZ2 import parser_task_gr
-from GoldenRatio import golden_ratio
-from parabols import parabolic_interpolation
-from Brent import brent
+from OZvMO.TZ2.ParserTZ2 import parser_task_gr
+from OZvMO.TZ2.GoldenRatio import golden_ratio
+from OZvMO.TZ2.parabols import parabolic_interpolation
+from OZvMO.TZ2.Brent import brent
 from IPython.display import display
 
 
@@ -69,5 +69,5 @@ def solve_brent(pression=1e-5, max_iter=500,
 
 
 if __name__ == '__main__':
-    solve_brent(pression=1e-5, max_iter=500,
+    solve_brent(precision=1e-5, max_iter=500,
                                   flag_results=True, flag_data=True, type_opt='min')

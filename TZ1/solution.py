@@ -1,7 +1,14 @@
-import OZvMO.parser as parser
-import OZvMO.LocalExtrema as LocalExtrema
-import OZvMO.plot as plot
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath('../..'))
+
+
+import TZ1.parser as parser
+import TZ1.LocalExtrema as LocalExtrema
+import TZ1.plot as plot
 from IPython.display import display
+
 
 def solve_task1():
     variab, func, restr = parser.parser_task1()
