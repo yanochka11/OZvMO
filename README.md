@@ -42,3 +42,26 @@ Y = [9.43319333e-09]
 <img width="950" alt="image" src="https://user-images.githubusercontent.com/99407452/163036261-36f65f79-5654-464e-8c50-42993a24be40.png">
 
 Функции возвращают найденную точку экстремума, значение функции в ней, количество итераций. 
+
+
+В папке ТЗ_4 находятся функциИ, релизующие различные виды регрессии – линейная ,полиномиальная: L1,L2. 
+
+
+Результаты работы линейной регрессии со степенью 1 и оценка синусоидальной функции с использованием полиномиальной регрессии со степенями x от 1 до 15.
+<img width="679" alt="image" src="https://user-images.githubusercontent.com/99407452/163722121-0b4682c1-b7d2-40ff-b0af-056ff2d8ec0b.png">
+
+Для удобства анализа реализован альтернативный формат отображения:
+<img width="1157" alt="image" src="https://user-images.githubusercontent.com/99407452/163722261-19b9fe11-1190-44a5-b3a9-261c586e5422.png">
+
+Ridge Regression(L2) с различными степенями alpha:
+<img width="742" alt="image" src="https://user-images.githubusercontent.com/99407452/163722608-af3498d3-2a5b-442a-a075-bbfbc66172d2.png">
+
+Для удобства анализа реализован альтернативный формат отображения:
+<img width="1241" alt="image" src="https://user-images.githubusercontent.com/99407452/163722381-db1a964e-aba8-443c-8a6d-a4a7431037f2.png">
+
+Lasso Regression(L1) с различными степенями alpha:
+
+<img width="735" alt="image" src="https://user-images.githubusercontent.com/99407452/163722548-14fdaf27-0422-4512-8235-8d6d21374706.png">
+
+Для удобства анализа реализован альтернативный формат отображения:
+<img width="1282" alt="image" src="https://user-images.githubusercontent.com/99407452/163722567-3085dd85-2737-4225-b2a2-b6a8b8482236.png">
